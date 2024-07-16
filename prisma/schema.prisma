@@ -24,4 +24,12 @@ model User {
   transactions Transaction[]
 }
 
-
+model Transaction {
+  id String @id @default(uuid())
+  text String
+  amount Float
+  userId String
+  user User @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@index([userId])
+}
